@@ -18,7 +18,11 @@ package org.springframework.samples.petclinic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.samples.petclinic.filter.MyFilter;
 
 /**
  * PetClinic Spring Boot Application.
@@ -26,12 +30,22 @@ import org.springframework.context.annotation.ImportRuntimeHints;
  * @author Dave Syer
  *
  */
+
+@ServletComponentScan
 @SpringBootApplication
 @ImportRuntimeHints(PetClinicRuntimeHints.class)
 public class PetClinicApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PetClinicApplication.class, args);
+	}
+
+	@Bean
+	public FilterRegistrationBean<MyFilter> myFilterRegistration() {
+		FilterRegistrationBean<MyFilter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(new MyFilter());
+		registration.addUrlPatterns("/*");
+		return registration;
 	}
 
 }
