@@ -2,14 +2,14 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <title>Login</title>
+    <title>Signup</title>
     <link rel="stylesheet" href="/resources/css/login.css">
 </head>
 
-<body style="background-image: url('/resources/images/bg_nci.jpeg'); background-attachment: fixed; background-size: 100% 100%;">
-    <div class="login-form">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
+<body style="background-image: url('/resources/image/pets.jpg'); background-size: cover;">
+    <div class="login-box">
+        <h1>Signup</h1>
+        <form action="/signup" method="POST">
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" />
@@ -19,16 +19,14 @@
                 <input type="password" id="password" name="password" />
             </div>
             <div>
-                <button type="submit">Login</button>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" />
             </div>
-        </form>
-        <textarea>Dont have an account?</textarea>
-        <form action="/signup" method="GET">
             <div>
-                <button type="submit">Sign Up</button>
+                <button type="submit">Signup</button>
             </div>
         </form>
-       
+        <p>Already have an account? <a href="/login">Login here</a>.</p>
     </div>
 </body>
 
