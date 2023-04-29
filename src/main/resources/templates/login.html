@@ -8,8 +8,9 @@
 
 <body style="background-image: url('/resources/images/bg_nci.jpeg'); background-attachment: fixed; background-size: 100% 100%;">
     <div class="login-form">
-        <h2>Login</h2>
+        <h3>Login</h3>
         <form action="/login" method="POST">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" />
@@ -24,6 +25,7 @@
         </form>
         <textarea>Dont have an account?</textarea>
         <form action="/signup" method="GET">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <div>
                 <button type="submit">Sign Up</button>
             </div>
