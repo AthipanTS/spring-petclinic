@@ -27,10 +27,9 @@
         <td th:text="*{telephone}"></td>
       </tr>
     </table>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+  
     <a th:href="@{__${owner.id}__/edit}" class="btn btn-primary">Edit
       Owner</a>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <a th:href="@{__${owner.id}__/pets/new}" class="btn btn-primary">Add
       New Pet</a>
   

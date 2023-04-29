@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyFilter implements Filter {
 
-	private final int MAX_REQUESTS_PER_IP = 10;
+	private final int MAX_REQUESTS_PER_IP = 20;
 
 	private final int TIME_WINDOW_SECONDS = 10;
 

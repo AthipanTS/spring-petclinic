@@ -1,7 +1,6 @@
 <html>
 <body>
   <form>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <th:block th:fragment="input (label, name, type)">
       <div th:with="valid=${!#fields.hasErrors(name)}"
         th:class="${'form-group' + (valid ? '' : ' has-error')}"

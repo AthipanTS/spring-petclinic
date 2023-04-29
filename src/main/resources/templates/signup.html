@@ -10,7 +10,6 @@
     <div class="login-box">
         <h1>Signup</h1>
         <form action="/signup" method="POST">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" />
@@ -27,7 +26,6 @@
                 <button type="submit">Signup</button>
             </div>
         </form>
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <p>Already have an account? <a href="/login">Login here</a>.</p>
     </div>
 </body>

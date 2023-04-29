@@ -69,6 +69,7 @@
     </dependency>
 
 
+
     <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -79,8 +80,7 @@
 
 
 
-
-    <!-- Databases - Uses H2 by default -->
+   <!-- Databases - Uses H2 by default -->
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
