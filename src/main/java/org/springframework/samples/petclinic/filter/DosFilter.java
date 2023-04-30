@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DosFilter implements Filter {
 
-	private final int MAX_REQUESTS_PER_IP = 2000;
+	private final int MAX_REQUESTS_PER_IP = 20;
 
 	private final int TIME_WINDOW_SECONDS = 10;
 
@@ -65,7 +65,7 @@ public class DosFilter implements Filter {
 				ipRequestCounts.remove(ipAddress);
 			}
 		}, TIME_WINDOW_SECONDS * 1000);
-
+		logger.log(Level.INFO, "Passing DoS filter");
 		chain.doFilter(request, response);
 
 	}

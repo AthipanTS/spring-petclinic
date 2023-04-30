@@ -4,8 +4,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +31,7 @@ public class CsrfFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		logger.log(Level.INFO, "inside csrf filter");
+		logger.log(Level.INFO, "Inside csrf filter");
 
 		// Get the current request and response objects as HttpServletRequest and
 		// HttpServletResponse
@@ -53,13 +53,13 @@ public class CsrfFilter implements Filter {
 			}
 
 			if (csrfParamValue == null) {
-				logger.log(Level.INFO, "CSRF check Failure");
+				logger.log(Level.INFO, "CSRF check Failure...");
 				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid CSRF token");
 				return;
 			}
 		}
 
-		logger.log(Level.INFO, "CSRF check success");
+		logger.log(Level.INFO, "Passing CSRF check...");
 		// Continue with the filter chain
 		chain.doFilter(request, response);
 	}

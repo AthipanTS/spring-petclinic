@@ -3,8 +3,8 @@ package org.springframework.samples.petclinic.filter;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +24,7 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		logger.log(Level.INFO, "inside sessionFilter filter");
+		logger.log(Level.INFO, "Inside sessionFilter filter...");
 
 		// Get the current request and response objects as HttpServletRequest and
 		// HttpServletResponse
@@ -32,12 +32,23 @@ public class SessionFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		HttpSession session = httpRequest.getSession(false);
+		String requestURI = httpRequest.getRequestURI();
+
+		if (requestURI.contains("login") || requestURI.equals("/") || requestURI.contains("validate")
+				|| requestURI.contains(".css") || requestURI.contains(".jpeg")) {
+			// Exclude requests to /login and /
+
+			logger.log(Level.INFO, "allowed endpoints...passing sessionFilter filter...");
+			chain.doFilter(request, response);
+			return;
+		}
 
 		if (session != null && session.getAttribute("username") != null) {
 			String username = (String) session.getAttribute("username");
-			System.out.println("Username: " + username);
+			logger.log(Level.INFO, "Passing Session filter for " + username);
 		}
 		else {
+			logger.log(Level.INFO, "Unauthorized Access found");
 			httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized access");
 			return;
 		}
