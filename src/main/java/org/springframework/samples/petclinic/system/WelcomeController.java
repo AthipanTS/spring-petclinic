@@ -16,6 +16,7 @@
 
 package org.springframework.samples.petclinic.system;
 
+import jakarta.servlet.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +24,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 class WelcomeController {
 
 	@GetMapping(value = { "/", "/login" })
-	public String welcome() {
+	public String welcome(HttpServletRequest request) {
+
+		// Validate the username = admin and password = admin...and then return login
+		// other wise, return
 		return "login";
 	}
 

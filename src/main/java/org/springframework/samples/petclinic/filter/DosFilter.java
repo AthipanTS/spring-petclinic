@@ -5,23 +5,21 @@ import jakarta.servlet.*;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.coyote.Response;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Order(1)
 @Component
-public class MyFilter implements Filter {
+public class DosFilter implements Filter {
 
-	private final int MAX_REQUESTS_PER_IP = 20;
+	private final int MAX_REQUESTS_PER_IP = 2000;
 
 	private final int TIME_WINDOW_SECONDS = 10;
 
@@ -29,7 +27,7 @@ public class MyFilter implements Filter {
 
 	private final ConcurrentHashMap<String, AtomicInteger> ipRequestCount = new ConcurrentHashMap<>();
 
-	private static final Logger logger = Logger.getLogger(MyFilter.class.getName());
+	private static final Logger logger = Logger.getLogger(DosFilter.class.getName());
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,10 +38,18 @@ public class MyFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		logger.log(Level.INFO, "inside filter");
+		logger.log(Level.INFO, "inside DoS filter");
 
+		// In this filter itself, we generate the csrftoken for new session
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+		// Generate a random CSRF token
+		String csrfToken = Double.toString(Math.random());
+
+		// Add the token to the session
+
+		HttpSession session = httpRequest.getSession();
 
 		String ipAddress = httpRequest.getRemoteAddr();
 		int requestCount = ipRequestCounts.getOrDefault(ipAddress, 0);

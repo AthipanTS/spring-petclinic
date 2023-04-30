@@ -183,6 +183,12 @@
             <artifactId>nohttp-checkstyle</artifactId>
             <version>${nohttp-checkstyle.version}</version>
           </dependency>
+          <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+          <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.0.3.RELEASE</version>
+          </dependency>
         </dependencies>
         <executions>
           <execution>
